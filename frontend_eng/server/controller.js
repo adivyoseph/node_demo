@@ -31,6 +31,12 @@ const pool = mysql.createPool({
 module.exports =  {
 
 
+    newtenant: function(req, res) {
+        console.log("newtenant " + req.body.tenant_name);
+
+
+    },
+
     id2tenant: function(req, res) {
         var userId = req.body.userid;
 

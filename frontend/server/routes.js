@@ -6,6 +6,8 @@ module.exports.initialize = function(app, router) {
     router.get('/login', controller.showLogin);
     router.post('/login', controller.processLogin);
 
+    router.post('/newtenant', controller.processNewtenant);
+
 
     app.use('/', router);
 };

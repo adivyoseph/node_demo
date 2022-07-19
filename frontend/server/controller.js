@@ -83,6 +83,63 @@ module.exports =  {
         });
 
 
+    },
+
+    processNewtenant: function(req, res) {
+
+         console.log("processNewtenant ");
+
+         request.post('http://localhost:10002/id_tenant', {userid: req.session.userId})
+         .then(function(response) {
+             console.log(response.data);
+                 if (response.data.tenant_id > 0 ) {
+                     //tenant entry set already
+                     //error
+                 }
+                 else {
+                     //primary_user: response.data.user_name
+
+                     var tenantObj = {
+                         tenant_name: req.body.tenant,
+                         primary: response.data.user_name,
+                         secondary: req.body.secondary,
+                         ide: req.body.ide,
+                         tools: req.body.tools,
+                         db: req.body.db,
+                         decription: req.body.description
+                     };
+
+                     //send to engine 
+
+                     request.post('http://localhost:10002/newtenant', tenantObj)
+                     .then(function(response1) {
+                         console.log(response1);
+
+                     })
+                     .catch(function(error) {
+                         console.log(error);
+                         //todo tell user
+                     });
+
+                     //if ok display manage page
+                     //else display error
+
+
+
+
+
+
+
+                 }
+
+         })
+         .catch(function(error) {
+             console.log(error);
+             //todo tell user
+         });
+
+
+
     }
 
 };
