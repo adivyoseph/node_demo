@@ -5,6 +5,31 @@ module.exports =  {
         if (!req.session.userId) {
             res.redirect('/login');
         } else {
+
+            request.post('http://localhost:10002/id_tenant', {userid: req.session.userId})
+            .then(function(response) {
+                console.log(response.data);
+                    if (response.data[0].tenant_id > 0) {
+                        //tenant entry set
+                    }
+                    else {
+                        //prompt form for new tenant
+                        //form data
+                        var form_data = {
+                            primary_user: response.data[0].user_name
+                        };
+                        res.render('newtenant', form_data);
+                    }
+
+            })
+            .catch(function(error) {
+                console.log(error);
+                //todo tell user
+            });
+
+
+
+
 /*             var filter = {
                     'userId': req.session.userId,
                     'watched': false
@@ -42,6 +67,9 @@ module.exports =  {
             console.log(response.data);
             //look up user in db
             //if found returns id and tenant
+            //console.log(response.data[0].user_id);
+            req.session.userId = response.data[0].user_id;
+            res.redirect('/');
             
 
             //if primary for an exiting tenant/team display manage page

@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS wf_users (
     admin_user BOOLEAN,
     primary_user BOOLEAN,
     secondary_user BOOLEAN,
-    tenant_member VARCHAR(20),
+    tenant_id int,
     created DATETIME DEFAULT CURRENT_TIMESTAMP,
 
 	PRIMARY KEY(user_id)
@@ -30,9 +30,46 @@ const pool = mysql.createPool({
 
 module.exports =  {
 
+
+    id2tenant: function(req, res) {
+        var userId = req.body.userid;
+
+        console.log("id2tenant " + userId );
+
+         //lookup user in db
+        pool.getConnection(function(err, conn) {
+            if (err) throw err;
+            console.log('Connected to MySQL Server!');
+            // Use the connection
+            conn.query('SELECT * FROM wf_users WHERE user_id = ?', userId , function (error, results, fields) {
+              if (error) {
+                  console.log("query failed");
+                  throw error;
+              }
+              if (results.length == 0) {
+                  console.log('invalid user_id results');
+                  //todo handle
+              }
+
+              const response = {
+                  tenant_id = results.data[0].tenant_id,
+                  user_name = results.data[0].name,
+                  primary_user = results.data[0].primary_use
+              };
+              console.log(response);
+              res.send(response);
+
+
+
+            });
+            pool.releaseConnection(conn);
+        });
+
+    }
+
     userlookup: function(req, res) {
 
-        var userObj = {
+       var userObj = {
             login: req.body.login,
             password: req.body.password
         };
