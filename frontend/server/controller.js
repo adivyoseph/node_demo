@@ -1,5 +1,4 @@
 var request = require('axios');
-const FormData = require('form-data');
 
 module.exports =  {
     index: function(req, res) {
@@ -35,17 +34,22 @@ module.exports =  {
             password: req.body.password
         };
 
-        const form_data = new FormData();
-        form_data.append('login', 'test');
 
         console.log("processLogin " + userObj.login);
 
         request.post('http://localhost:10002/userlookup', {login: userObj.login})
         .then(function(response) {
-            console.log(response);
+            console.log(response.data);
+            //look up user in db
+            //if found just return id
+            //else create use and return id
+
+
+
         })
         .catch(function(error) {
             console.log(error);
+            //todo tell user
         });
 
 /*
