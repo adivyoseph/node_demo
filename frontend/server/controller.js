@@ -1,16 +1,17 @@
-var request = require('request');
+var request = require('axios');
+const FormData = require('form-data');
 
 module.exports =  {
     index: function(req, res) {
         if (!req.session.userId) {
             res.redirect('/login');
         } else {
-/*
-            var filter = {
+/*             var filter = {
                     'userId': req.session.userId,
                     'watched': false
                 },
-                options = {
+               options = {
+
                     sort: [['release_date',1]]
                 };
 
@@ -26,13 +27,28 @@ module.exports =  {
     showLogin: function(req, res) {
         res.render('login');
     },
+
     processLogin: function(req, res) {
-/*
+
         var userObj = {
-            email: req.body.email,
+            login: req.body.login,
             password: req.body.password
         };
 
+        const form_data = new FormData();
+        form_data.append('login', 'test');
+
+        console.log("processLogin " + userObj.login);
+
+        request.post('http://localhost:10002/userlookup', {login: userObj.login})
+        .then(function(response) {
+            console.log(response);
+        })
+        .catch(function(error) {
+            console.log(error);
+        });
+
+/*
         client
             .db()
             .collection('users')
