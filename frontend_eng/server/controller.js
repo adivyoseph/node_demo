@@ -1,4 +1,6 @@
 var mysql      = require('mysql2');
+var sleep = require('system-sleep');
+
 /*
 CREATE TABLE IF NOT EXISTS wf_users (
 	user_id MEDIUMINT NOT NULL AUTO_INCREMENT, 
@@ -53,17 +55,20 @@ module.exports =  {
                   pool.getConnection(function(err, conn1) {
                       if (err) throw err;
                       //var records = userObj.login, userObj.password;
-                      conn1.query('INSERT into wf_users (name, password ) VALUES (? ?)', [userObj.login, userObj.password], function (error, results, fields) {
+                      conn1.query('INSERT into wf_users (name, password ) VALUES (? ?)', [userObj.login, userObj.password], function (error, results1, fields) {
                           if (error) {
                               console.log("insert failed");
                               throw error;
                           }
+                          console.log("insert ok");
+                          console.log(results1);
 
                       });
                       pool.releaseConnection(conn1);
                   });
 
                   //update results
+         
                   pool.getConnection(function(err, conn2) {
                       if (err) throw err;
                       conn.query('SELECT * FROM wf_users WHERE name = ?', userObj.login , function (error, results, fields) {
@@ -71,19 +76,24 @@ module.exports =  {
                             console.log("query failed");
                             throw error;
                           }
+
+                          console.log(results);
+                          res.send(results);
+
+
                       });
 
-                      res.send(results);
-                      console.log(results);
 
                       pool.releaseConnection(conn2);
+
+
                   });
               }
               else {
                   //existing user so
                   //check password
-                  res.send(results);
                   console.log(results);
+                  res.send(results);
               }
               //console.log(fields);
             });

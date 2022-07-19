@@ -42,9 +42,9 @@ module.exports =  {
             console.log(response.data);
             //look up user in db
             //if found returns id and tenant
-            //else create use and return id
+            
 
-            //if primary for an exit tenant/team display manage page
+            //if primary for an exiting tenant/team display manage page
             //else display new tenant form
 
         })
