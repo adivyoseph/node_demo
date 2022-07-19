@@ -57,7 +57,7 @@ module.exports =  {
 
 
 
-        res.send('login');
+ //       res.send('login');
 
     }
 
