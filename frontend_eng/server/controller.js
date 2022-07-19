@@ -42,7 +42,7 @@ module.exports =  {
             if (err) throw err;
             console.log('Connected to MySQL Server!');
             // Use the connection
-            conn.query('SELECT * FROM wf_users WHERE nane = ?, userObj.login , function (error, results, fields) {
+            conn.query('SELECT * FROM wf_users WHERE name = ?', userObj.login , function (error, results, fields) {
               if (error) {
                   console.log("query failed");
                   throw error;
