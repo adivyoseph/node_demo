@@ -1,5 +1,6 @@
 
 <br/><br/><br/>
+<h1 class="text-center">New Tenant Form</h1>
 
 <form action="/newtenant" method="post">
     <div class="row">
@@ -16,6 +17,45 @@
 			<label for="primary">Primary user  {{primary_user}}</label>
                     </div>
                 </div>
+
+                <div class="row">
+                    <div class="col-md-12 form-group">
+			<label for="secondat">Seconday user</label>
+                        <input type="text" name="seconday" id="seconday" class="form-control" placeholder="secondary for tenant">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 form-group">
+			<label for="ide">IDE used</label>
+                        <input type="text" name="ide" id="ide" class="form-control" placeholder="IDE used">
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-12 form-group">
+			<label for="tools">other tools used</label>
+                        <input type="text" name="tools" id="tools" class="form-control" placeholder="tools and libraries used">
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-12 form-group">
+			<label for="db">DB to be used</label>
+                        <input type="text" name="db" id="db" class="form-control" placeholder="DB to be used">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 form-group">
+			<label for="description">Description</label>
+                        <input type="text" name="description" id="description" class="form-control" placeholder="Description">
+                    </div>
+                </div>
+
+
                 <div class="row">
                     <div class="col-sm-12">
                         <button type="submit" name="submit" class="btn btn-primary btn-block">Submit</button>
