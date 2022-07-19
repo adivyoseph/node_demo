@@ -47,13 +47,49 @@ module.exports =  {
                   console.log("query failed");
                   throw error;
               }
-              res.send(results);
-              console.log(results);
+              if (results.length == 0) {
+                  console.log('no results');
+                  //add user
+                  pool.getConnection(function(err, conn1) {
+                      if (err) throw err;
+                      //var records = userObj.login, userObj.password;
+                      conn1.query('INSERT into wf_users (name, password ) VALUES (? ?)', [userObj.login, userObj.password], function (error, results, fields) {
+                          if (error) {
+                              console.log("insert failed");
+                              throw error;
+                          }
+
+                      });
+                      pool.releaseConnection(conn1);
+                  });
+
+                  //update results
+                  pool.getConnection(function(err, conn2) {
+                      if (err) throw err;
+                      conn.query('SELECT * FROM wf_users WHERE name = ?', userObj.login , function (error, results, fields) {
+                          if (error) {
+                            console.log("query failed");
+                            throw error;
+                          }
+                      });
+
+                      res.send(results);
+                      console.log(results);
+
+                      pool.releaseConnection(conn2);
+                  });
+              }
+              else {
+                  //existing user so
+                  //check password
+                  res.send(results);
+                  console.log(results);
+              }
               //console.log(fields);
             });
        // Don't forget to release the connection when finished!
        pool.releaseConnection(conn);
-    })
+    });
 
 
 
