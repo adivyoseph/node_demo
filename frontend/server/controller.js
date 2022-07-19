@@ -9,14 +9,15 @@ module.exports =  {
             request.post('http://localhost:10002/id_tenant', {userid: req.session.userId})
             .then(function(response) {
                 console.log(response.data);
-                    if (response.data[0].tenant_id > 0) {
+                    if (response.data.tenant_id > 0 ) {
                         //tenant entry set
                     }
                     else {
                         //prompt form for new tenant
+                        console.log('prompt for new form');
                         //form data
                         var form_data = {
-                            primary_user: response.data[0].user_name
+                            primary_user: response.data.user_name
                         };
                         res.render('newtenant', form_data);
                     }
@@ -81,26 +82,7 @@ module.exports =  {
             //todo tell user
         });
 
-/*
-        client
-            .db()
-            .collection('users')
-            .find(userObj, {}, {})
-            .toArray(function(err, users) {
-                if (users.length === 0) {
-                    client
-                        .db()
-                        .collection('users')
-                        .insert(userObj, function(err, users) {
-                            req.session.userId = users[0]._id;
-                            res.redirect('/');
-                        });
-                } else {
-                    req.session.userId = users[0]._id;
-                    res.redirect('/');
-                }
-        });  
-*/
+
     }
 
 };

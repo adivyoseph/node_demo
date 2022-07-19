@@ -44,10 +44,10 @@ CREATE TABLE IF NOT EXISTS wf_users (
 	user_id MEDIUMINT NOT NULL AUTO_INCREMENT, 
 	name varchar(20), 
     password varchar(20),
-    admin_user BOOLEAN,
-    primary_user BOOLEAN,
-    secondary_user BOOLEAN,
-    tenant_id INT,
+    admin_user BOOLEAN NOT NULL DEFAULT FALSE,
+    primary_user BOOLEAN NOT NULL DEFAULT FALSE,
+    secondary_user BOOLEAN NOT NULL DEFAULT FALSE,
+    tenant_id INT NOT NULL DEFAULT 0,
     created DATETIME DEFAULT CURRENT_TIMESTAMP,
 
 	PRIMARY KEY(user_id)

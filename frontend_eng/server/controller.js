@@ -50,11 +50,12 @@ module.exports =  {
                   console.log('invalid user_id results');
                   //todo handle
               }
-
+              console.log('userid search');
+              console.log(results);
               const response = {
-                  tenant_id = results.data[0].tenant_id,
-                  user_name = results.data[0].name,
-                  primary_user = results.data[0].primary_use
+                  tenant_id: results[0].tenant_id,
+                  user_name: results[0].name,
+                  primary_user: results[0].primary_use
               };
               console.log(response);
               res.send(response);
@@ -65,7 +66,7 @@ module.exports =  {
             pool.releaseConnection(conn);
         });
 
-    }
+    },
 
     userlookup: function(req, res) {
 
