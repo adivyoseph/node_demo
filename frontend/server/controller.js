@@ -37,14 +37,15 @@ module.exports =  {
 
         console.log("processLogin " + userObj.login);
 
-        request.post('http://localhost:10002/userlookup', {login: userObj.login})
+        request.post('http://localhost:10002/userlookup', {login: userObj.login, password: userObj.password})
         .then(function(response) {
             console.log(response.data);
             //look up user in db
-            //if found just return id
+            //if found returns id and tenant
             //else create use and return id
 
-
+            //if primary for an exit tenant/team display manage page
+            //else display new tenant form
 
         })
         .catch(function(error) {
