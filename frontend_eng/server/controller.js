@@ -1,4 +1,4 @@
-
+var mysql      = require('mysql2');
 /*
 CREATE TABLE IF NOT EXISTS wf_users (
 	user_id MEDIUMINT NOT NULL AUTO_INCREMENT, 
@@ -14,6 +14,17 @@ CREATE TABLE IF NOT EXISTS wf_users (
 );
 */
 
+
+// Create the connection pool.
+const pool = mysql.createPool({
+  host     : 'localhost',
+  user     : 'root',
+  password : 'martin',
+  database : 'tenantdb',
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0
+});
 
 module.exports =  {
 
@@ -31,7 +42,7 @@ module.exports =  {
             if (err) throw err;
             console.log('Connected to MySQL Server!');
             // Use the connection
-            conn.query('SELECT name,password,user_id,tenant_member FROM wf_users WHERE nane = ?,[userObj.login], function (error, results, fields) {
+            conn.query('SELECT * FROM wf_users WHERE nane = ?, userObj.login , function (error, results, fields) {
               if (error) {
                   console.log("query failed");
                   throw error;

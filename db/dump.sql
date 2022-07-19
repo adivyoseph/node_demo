@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS wf_messages (
 */
 
 
-/*
+
 CREATE TABLE IF NOT EXISTS wf_users (
 	user_id MEDIUMINT NOT NULL AUTO_INCREMENT, 
 	name varchar(20), 
@@ -52,6 +52,6 @@ CREATE TABLE IF NOT EXISTS wf_users (
 
 	PRIMARY KEY(user_id)
 );
-*/
+
 
 /*INSERT INTO tenants VALUES ("6d62d909-f957-430e-8689-b5129c0bb75e", "team1", "primary", "secondary", "ide", "other", "test");*/
