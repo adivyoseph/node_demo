@@ -6,9 +6,10 @@ module.exports =  {
             res.redirect('/login');
         } else {
 
+            console.log('session.userId ' + req.session.userId);
             request.post('http://localhost:10002/id_tenant', {userid: req.session.userId})
             .then(function(response) {
-                console.log(response.data);
+                console.log('tenant_id ' + response.data.tenant_id);
                     if (response.data.tenant_id > 0 ) {
                         //tenant entry set
                     }
@@ -27,28 +28,9 @@ module.exports =  {
                 console.log(error);
                 //todo tell user
             });
-
-
-
-
-/*             var filter = {
-                    'userId': req.session.userId,
-                    'watched': false
-                },
-               options = {
-
-                    sort: [['release_date',1]]
-                };
-
-            client.db().collection('movies')
-                .find(filter, {}, options)
-                .toArray(function(err, movies) {
-                    if (err) { throw err; }
-                    res.render('index', { 'movies': movies });
-                });
-*/
         }
     },
+
     showLogin: function(req, res) {
         res.render('login');
     },
@@ -106,14 +88,15 @@ module.exports =  {
                          ide: req.body.ide,
                          tools: req.body.tools,
                          db: req.body.db,
-                         decription: req.body.description
+                         description: req.body.description
                      };
 
                      //send to engine 
 
                      request.post('http://localhost:10002/newtenant', tenantObj)
                      .then(function(response1) {
-                         console.log(response1);
+
+                         console.log(response1.data);
 
                      })
                      .catch(function(error) {
@@ -125,7 +108,7 @@ module.exports =  {
                      //else display error
 
 
-
+                     res.render('login');
 
 
 

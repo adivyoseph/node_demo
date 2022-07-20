@@ -1,13 +1,14 @@
 
 
 CREATE TABLE IF NOT EXISTS tenants (
-	tenant_id MEDIUMINT NOT NULL AUTO_INCREMENT, 
+	tenant_id INT NOT NULL AUTO_INCREMENT, 
 /*request form input data*/
 	name varchar(20), 
     primary_user VARCHAR (20),
     secondary_user VARCHAR (20),
     ide VARCHAR (20),
     other_services VARCHAR (100),
+    db VARCHAR (20),
     description varchar(200), 
 /*added by admin */
     ms_group VARCHAR (20),
@@ -30,7 +31,7 @@ CREATE TABLE IF NOT EXISTS tenants (
 
 /*
 CREATE TABLE IF NOT EXISTS wf_messages (
-	key MEDIUMINT NOT NULL AUTO_INCREMENT, 
+	key INT NOT NULL AUTO_INCREMENT, 
     user varchar(20), 
     tenant_id INIT, 
     active BOOLEAN,
@@ -41,7 +42,7 @@ CREATE TABLE IF NOT EXISTS wf_messages (
 
 
 CREATE TABLE IF NOT EXISTS wf_users (
-	user_id MEDIUMINT NOT NULL AUTO_INCREMENT, 
+	user_id INT NOT NULL AUTO_INCREMENT, 
 	name varchar(20), 
     password varchar(20),
     admin_user BOOLEAN NOT NULL DEFAULT FALSE,
