@@ -15,7 +15,8 @@ CREATE TABLE IF NOT EXISTS tenants (
     github   VARCHAR (128),
 
 /* tracked by the database */
-    work_flow int,
+    work_flow int NOT NULL DEFAULT 0,
+    work_flow_text VARCHAR (20) DEFAULT 'request pending' NOT NULL,
 /* workflow time stamps 
 #    requested datetime DEFAULT CURRENT_TIMESTAMP,
 #    ack_sent datetime,
