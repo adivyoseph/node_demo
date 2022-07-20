@@ -10,18 +10,34 @@ module.exports =  {
             request.post('http://localhost:10002/id_tenant', {userid: req.session.userId})
             .then(function(response) {
                 console.log('tenant_id ' + response.data.tenant_id);
-                    if (response.data.tenant_id > 0 ) {
-                        //tenant entry set
-                    }
-                    else {
-                        //prompt form for new tenant
-                        console.log('prompt for new form');
-                        //form data
-                        var form_data = {
-                            primary_user: response.data.user_name
-                        };
-                        res.render('newtenant', form_data);
-                    }
+                if (response.data.tenant_id > 0 ) {
+                    //tenant entry set
+                    // get tenant data
+                    var tenant_id = response.data.tenant_id;
+                    request.post('http://localhost:10002/gettenant', {tenant_id: tenant_id})
+                        .then(function(response1) {
+                            console.log(response1.data[0]);
+
+                            res.render('manage', response1.data[0]);
+
+
+
+
+                        })
+                        .catch(function(error1) {
+                            console.log(error1);
+                            //todo tell user
+                        });
+                }
+                else {
+                    //prompt form for new tenant
+                    console.log('prompt for new form');
+                    //form data
+                    var form_data = {
+                        primary_user: response.data.user_name
+                    };
+                    res.render('newtenant', form_data);
+                }
 
             })
             .catch(function(error) {
@@ -108,7 +124,7 @@ module.exports =  {
                      //else display error
 
 
-                     res.render('login');
+                     res.redirect('/');
 
 
 
@@ -123,6 +139,12 @@ module.exports =  {
 
 
 
+    },
+
+
+    processManage: function(req, res) {
+
+         console.log("processManage ");
     }
 
 };

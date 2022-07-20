@@ -9,5 +9,7 @@ module.exports.initialize = function(app, router) {
     router.post('/newtenant', controller.newtenant);     //create new tenant
 
 
+    router.post('/gettenant', controller.gettenant);     //get tenant data
+
     app.use('/', router);
 };
