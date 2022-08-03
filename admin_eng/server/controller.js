@@ -26,7 +26,7 @@ module.exports =  {
             if (err) throw err;
             //console.log('Connected to MySQL Server!');
             // Use the connection
-            conn.query('SELECT tenant_id FROM tenants ',  function (error, results, fields) {
+            conn.query('SELECT * FROM tenants ',  function (error, results, fields) {
               if (error) {
                   console.log("query failed");
                   throw error;
@@ -65,11 +65,11 @@ module.exports =  {
                }
                console.log('results.length ' + results.length);
                if (results.length == 0) {
-                   //todo handle error
+                   console.log("no results");
                }
                else {
-                   console.log(results);
-                   res.send(results);
+                   console.log(results[0]);
+                   res.send(results[0]);
                }
              });
              pool.releaseConnection(conn);

@@ -5,16 +5,22 @@ module.exports =  {
             request.post('http://localhost:10003/list_id_tenants')
             .then(function(response) {
                 console.log(response.data);
-                var tenantRequests = new Array();
-                for (let i = 0; i < response.data.length; i++) {
+                console.log(response.data.length);
+                let tenantRequests = [];
+/*                var i;
+                for ( i = 0; i < response.data.length; i++) {
                     var tenant_id = response.data[i].tenant_id;
+
+                   //console.log("tenant_id " + tenant_id);
+                    //console.log(response.data[i]);
+                    //tenantRequests[i] = JSON.stringify(response.data[i]);
+                    //tenantRequests[i] = response.data[i];
+                    //console.log("tenantRequests " + tenantRequests);
+
                     request.post('http://localhost:10003/gettenant', {tenant_id: tenant_id})
-                    
                     .then(function(response_a) {
-                        console.log(response_a.data);
-
+                        //console.log("response_a.data " +  tenant_id + response_a);
                         tenantRequests[i] = response_a.data;
-
 
                     })
                     .catch(function(error) {
@@ -22,9 +28,16 @@ module.exports =  {
                         //todo tell user
                     });
 
-                }
 
-                console.log(tenantRequests);
+                }
+                //res.contentType('application/json');
+                //res.send(JSON.stringify(result));
+ //               if (i < response.data.length) {
+ //               }
+ */
+ //               console.log("final " + tenantRequests.length + tenantRequests);
+
+                res.render('dashboard', {'tenants': response.data});
 
             })
             .catch(function(error) {
