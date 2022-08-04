@@ -44,6 +44,22 @@ module.exports =  {
                 console.log(error);
                 //todo tell user
             });
+    },
+
+    //button pressed
+    req_manage_tenant: function(req, res) {
+         console.log("req_manage_tenant" + req.body.id);
+         var form_data = {
+             tenant_id: req.body.id
+         };
+         res.render('manage', form_data );
+
+    },
+
+    manage_tenant: function(req, res) {
+         console.log("get_manage_tenant" + req.body);
+         res.render('manage');
+
     }
 
 };

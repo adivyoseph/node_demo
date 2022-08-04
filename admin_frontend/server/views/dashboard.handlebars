@@ -3,9 +3,32 @@
 
 <hr size="1" />
 <h1 class="text-center">Dashboard</h1>
-<ul>
-{{#each tenants}}
-                <li> <a> teanat_id = {{tenant_id}} name {{name}} </a></li>
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th scope="col"> state</th>
+			<th scope="col"> tenant</th>
+			<th scope="col"> date</th>
+			<th scope="col"> Action</th>
+		</tr>
+	</thead>
+	<tbody>
+		{{#each tenants}}
+		<tr>
+			<th scope="row"> {{work_flow_text}}</th>
+			<th scope="row"> {{name}}</th>
+			<th scope="row"> todo</th>
+			<th> 
+				<form action="/dashboard" method="post" data-id={{tenant_id}}>
+				<input type="hidden" value={{tenant_id}} name="id" id="id" >
+				<button type="submit"  class="btn btn-outline-primary"  onclick="/dashboard += '?tenantid={{tenant_id}}'">Edit</button>
+				</form>
+			</th>
+
+		</tr>
+		{{/each}}
+	 </tbody>
+</table>
+ 
 <hr size="1" />
-{{/each}}
-</ul>
+
