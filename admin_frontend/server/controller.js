@@ -52,7 +52,22 @@ module.exports =  {
          var form_data = {
              tenant_id: req.body.id
          };
-         res.render('manage', form_data );
+         //res.render('manage', form_data );
+         var tenant_id = req.body.id;
+         request.post('http://localhost:10003/gettenant', {tenant_id: tenant_id})
+           .then(function(response1) {
+               console.log(response1.data);
+
+               res.render('manage', response1.data);
+
+
+            })
+            .catch(function(error) {
+                console.log(error);
+                //todo tell user
+            });
+
+
 
     },
 
