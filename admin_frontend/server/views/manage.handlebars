@@ -3,15 +3,31 @@
 
 <hr size="1" />
 <h1 class="text-center">Manage a Tenant</h1>
-<a> tenant_id = {{tenant_id}}</a>
+<a> Tenant_id = {{tenant_id}}</a>
 
 <div class="row">
-    <ul>
-    	<li>Tenant {{name}}</li>
-    	<li>Primary {{primary_user}}</li>
-    	<li>Secondary {{secondary_user}}</li>
-	<li>Status {{work_flow_text}}</li>
-    </ul> 
+	<div class="panel-body">
+		<div class="row">    
+			<div class="col-sm-2">Tenant : </div>
+			<div class="col-sm-4">{{name}}</div>
+		</div>
+
+		<div class="row">    
+			<div class="col-sm-2">Primary : </div>
+			<div class="col-sm-4">{{primary_user}}</div>
+		</div>
+
+
+		<div class="row">    
+			<div class="col-sm-2">Secondary: </div>
+			<div class="col-sm-4">{{secondary_user}}</div>
+		</div>
+
+		<div class="row">    
+			<div class="col-sm-2">Status   : </div>
+			<div class="col-sm-4">{{work_flow_text}}</div>
+		</div>
+    </div>
 </div>
  
 <hr size="1" />
